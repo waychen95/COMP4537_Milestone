@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.bookOpen {
+    background-color: var(--muted-foreground);
+    border: var(--muted-foreground) 1px solid;
+    border-radius: 50%;
+    padding: 1rem;
+}
+
+.title_container p {
+    max-width: 500px;
+}
+
+.begin_button {
+    color: white;
+    padding: 1rem;
+    background-color: var(--primary);
+    text-decoration: none;
+}
+
+.begin_button:hover {
+    background-color: oklch(53.295% 0.05152 60.953);
+}
