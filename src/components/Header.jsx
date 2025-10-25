@@ -18,7 +18,7 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className={styles.desktopNav}>
             <NavLink to="/topics">Topics</NavLink>
-            <NavLink to="/about">About</NavLink>
+            {/* <NavLink to="/about">About</NavLink> */}
           </div>
 
           {/* Mobile Menu Button */}

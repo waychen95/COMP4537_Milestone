@@ -11,7 +11,7 @@ export default function Home() {
             <div className={styles.title_container}>
                 <h3>A Personal Collection</h3>
                 <h1>Web Computing</h1>
-                <p>A comprehensive exploration of web development fundamentals, from JavaScript internals to architectural patterns, security practices, and performance optimization.</p>
+                <p>A complete guide to web development basics, covering JavaScript, architecture, security, and performance.</p>
             </div>
             <div>
                 <NavLink className={styles.begin_button} to="/topics">Begin Reading</NavLink>
