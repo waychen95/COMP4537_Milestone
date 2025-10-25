@@ -1,0 +1,110 @@
+.aboutPage {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.headerSection {
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+.headerContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.pageSubtitle {
+  font-size: 1.25rem;
+  color: var(--muted-foreground);
+}
+
+.contentContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.cardIcon {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.cardContent p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.cardContent ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.cardContent li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cardContent li::before {
+  content: "•";
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+}
+
+.startReading {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.startButton {
+    color: white;
+    padding: 1rem;
+    background-color: var(--primary);
+    text-decoration: none;
+}
+
+.startButton:hover {
+    background-color: oklch(53.295% 0.05152 60.953);
+}

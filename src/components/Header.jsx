@@ -12,13 +12,13 @@ export default function Header() {
         <div className={styles.navInner}>
           <NavLink to="/" className={styles.logo}>
             <BookOpen size={32}/>
-            <span>Wayne's Web Computing Diary</span>
+            <span>Web Computing Diary</span>
           </NavLink>
 
           {/* Desktop Navigation */}
           <div className={styles.desktopNav}>
             <NavLink to="/topics">Topics</NavLink>
-            {/* <NavLink to="/about">About</NavLink> */}
+            <NavLink to="/about">About</NavLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -30,7 +30,7 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className={styles.mobileNav}>
-            <NavLink href="/chapters" onClick={() => setIsOpen(false)}>Contents</NavLink>
+            <NavLink href="/topics" onClick={() => setIsOpen(false)}>Topics</NavLink>
             <NavLink href="/about" onClick={() => setIsOpen(false)}>About</NavLink>
           </div>
         )}

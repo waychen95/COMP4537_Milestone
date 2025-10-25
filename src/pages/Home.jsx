@@ -9,8 +9,7 @@ export default function Home() {
         <div class={styles.main}>
             <BookOpen size={50} className={styles.bookOpen}></BookOpen>
             <div className={styles.title_container}>
-                <h3>A Personal Collection</h3>
-                <h1>Web Computing</h1>
+                <h1>Wayne's Web Computing Diary</h1>
                 <p>A complete guide to web development basics, covering JavaScript, architecture, security, and performance.</p>
             </div>
             <div>
