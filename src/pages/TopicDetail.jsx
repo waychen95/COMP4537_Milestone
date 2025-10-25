@@ -3,29 +3,50 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import topics from "../data/topics";
+import styles from "./TopicDetail.module.css";
 
 export default function TopicDetail() {
   const { id } = useParams();
-  const topic = topics.find((t) => t.id === id);
+  const currentIndex = topics.findIndex((t) => t.id === id);
+  const topic = topics[currentIndex];
 
-  if (!topic) return (
-    <div className="p-8">
-      <Link to="/" className="">← Back</Link>
-      <h2 className="">Topic not found</h2>
-      <p>We could not find a topic with the ID "{id}".</p>
-    </div>
-  );
+  const prevTopic = currentIndex > 0 ? topics[currentIndex - 1] : null;
+  const nextTopic = currentIndex < topics.length - 1 ? topics[currentIndex + 1] : null;
 
   return (
-    <div className="">
-      <Link to="/" className="">← Back</Link>
+    <div className={styles.main}>
+      {prevTopic ? (
+        <Link to={`/topics/${prevTopic.id}`} className={styles.arrows}>
+          <p>←</p>
+          <p className={styles.arrowTitle}>{prevTopic.title}</p>
+        </Link>
+      ) : (
+        <span className={styles.disabled}></span>
+      )}
 
-      <h1 className="">{topic.title}</h1>
-      <p className="">{topic.description}</p>
+      {!topic ? (
+        <div className={styles.contentContainer}>
+          <h2>Topic not found</h2>
+          <p>We could not find a topic with the ID "{id}".</p>
+        </div>
+      ) : (
+        <div className={styles.contentContainer}>
+          <h1>{topic.title}</h1>
+          <p>{topic.description}</p>
+          <div>
+            <ReactMarkdown>{topic.content}</ReactMarkdown>
+          </div>
+        </div>
+      )}
 
-      <div className="">
-        <ReactMarkdown>{topic.content}</ReactMarkdown>
-      </div>
+      {nextTopic ? (
+        <Link to={`/topics/${nextTopic.id}`} className={styles.arrows}>
+          <p>→</p>
+          <p className={styles.arrowTitle}>{nextTopic.title}</p>
+        </Link>
+      ) : (
+        <span className={styles.disabled}> </span>
+      )}
     </div>
   );
 }

@@ -141,6 +141,7 @@ john.greet(); // Hello, John
 `
   },
 
+  // Section II: Web Architecture
   {
     number: "VII",
     id: "web-architectural-patterns",
@@ -148,7 +149,7 @@ john.greet(); // Hello, John
     description: "Overview of key architectural approaches for building scalable web applications",
     content: `
 ### Overview
-Choosing the right architecture helps maintainability, scalability, efficiency, robustness, security and performance.
+Choosing the right architecture helps maintainability, scalability, and performance.
 
 ### Common Patterns
 - Monolithic
@@ -330,88 +331,23 @@ Business logic is at the center, surrounded by adapters connecting to databases,
 `
   },
 
+  // Section III: JavaScript Runtime and Networking
   {
     number: "XIX",
     id: "promises-await-async",
     title: "Promises, await, and async",
     description: "Controlling asynchronous flow with promises and the async/await syntax",
     content: `
-  ### Promises, Async, and Await
-
-  A Promise represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
-
-  ### The Three States of a Promise
-  **1. Pending** – the initial state, before the result is known  
-  **2. Fulfilled** – the operation completed successfully and a value is available  
-  **3. Rejected** – the operation failed and a reason (error) is available  
-
-  Once a promise is fulfilled or rejected, it becomes **settled** and cannot change state again.
-
-  ### Promise Behavior
-  A Promise is **eager** – when you create one, it immediately executes its internal code.  
-  It does not wait for a "then" call; it starts resolving the asynchronous value right away.
-
-  **Code Example:**  
-      function getData() {
-          return new Promise((resolve, reject) => {
-              console.log("Fetching...");
-              setTimeout(() => resolve("Data loaded"), 1000);
-          });
-      }
-
-      const p = getData();  // Logs "Fetching..." immediately
-
-  ### then(), catch(), and finally()
-  - **then(onFulfilled, onRejected)** – handles a fulfilled or rejected value  
-  - **catch(onRejected)** – handles rejections only  
-  - **finally(onFinally)** – runs whether the promise is fulfilled or rejected  
-
-  **Note:** "then" and "catch" callbacks **never run synchronously** – they are scheduled as **microtasks**, which execute after the current call stack clears.
-
-  ### Promise.resolve()
-  **Promise.resolve(value)** creates a promise that is already fulfilled with the given value.  
-  Useful when you want to wrap a value in a promise or ensure a consistent asynchronous interface.
-
-  **Code Example:**  
-      Promise.resolve(42).then(v => console.log(v));  
-      // Logs 42 asynchronously
-
-  ### Async and Await
-  Declaring a function with **async** makes it return a promise automatically.  
-  Inside an async function, **await** pauses execution until the awaited promise settles and returns its result.
-
-  **Code Example:**  
-      async function fetchData() {
-          const response = await fetch('/api/data');
-          const data = await response.json();
-          console.log(data);
-      }
-
-      fetchData();
-
-  ### Microtasks vs Macrotasks
-  - **Microtasks**: promise callbacks (then, catch, finally), queueMicrotask()  
-  - **Macrotasks**: setTimeout, setInterval, I/O events, other timers  
-
-  Microtasks always run **before** the next macrotask, so promise callbacks execute before timers.
-
-  **Code Example:**  
-      console.log("start");
-
-      setTimeout(() => console.log("timeout"), 0);
-
-      Promise.resolve().then(() => console.log("promise"));
-
-      console.log("end");
-
-  **Output Order:**  
-      start  
-      end  
-      promise  
-      timeout
-  `
+### Example
+\`\`\`js
+async function fetchData() {
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  console.log(data);
+}
+\`\`\`
+`
   },
-
   {
     number: "XX",
     id: "fetch",
@@ -454,6 +390,7 @@ fetch('https://api.example.com/data')
 `
   },
 
+  // Section IV: Web Security and Optimization
   {
     number: "XXIII",
     id: "public-private-key",
@@ -547,50 +484,15 @@ ctx.fillRect(10, 10, 100, 50);
     title: "Local Storage",
     description: "Persisting small amounts of data on the client side",
     content: `
-  ### Local Storage
-
-  Local Storage is a simple key/value storage available in the browser. It allows data to **persist across sessions** (closing and reopening the browser).
-
-  ### Key Features
-  - Stores data as strings in key/value pairs
-  - Maximum storage ~5-10MB depending on the browser
-  - Synchronous API
-  - Data persists even after closing the tab or browser
-  - **Not secure for sensitive info** (e.g., passwords)
-
-  ### Basic Operations
-  **Set an item:**  
-      localStorage.setItem('name', 'Wayne');
-
-  **Get an item:**  
-      const name = localStorage.getItem('name');
-      console.log(name);  // Wayne
-
-  **Remove an item:**  
-      localStorage.removeItem('name');
-
-  **Clear all items:**  
-      localStorage.clear();
-
-  ### Storing Objects
-  Since Local Storage only stores strings, use **JSON.stringify** to store objects and **JSON.parse** to retrieve them:
-
-      const user = { id: 1, name: 'Wayne' };
-      localStorage.setItem('user', JSON.stringify(user));
-
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      console.log(storedUser.name);  // Wayne
-
-  ### Use Cases
-  - Saving user preferences (theme, language)
-  - Persisting small amounts of app state
-  - Caching lightweight data for offline access
-
-  ### Notes
-  - Accessing localStorage can throw errors if the browser disables it (e.g., in private mode)
-  - Always check for availability:  
-        if (typeof localStorage !== 'undefined') { /* safe to use */ }
-  `
+### Overview
+- Key/value storage in browser
+- Persists across sessions
+- Not secure for sensitive info
+\`\`\`js
+localStorage.setItem('name', 'Wayne');
+const name = localStorage.getItem('name');
+\`\`\`
+`
   },
   {
     number: "XXXI",

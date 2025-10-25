@@ -30,8 +30,13 @@
     text-align: end;
 }
 
+.topic:hover {
+    background-color: var(--secondary);
+}
+
 .topic {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
+    padding: 0.5rem;
 }

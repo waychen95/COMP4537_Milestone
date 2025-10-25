@@ -11,8 +11,8 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.navInner}>
           <NavLink to="/" className={styles.logo}>
-            <BookOpen size={30}/>
-            <span>Web Computing</span>
+            <BookOpen size={32}/>
+            <span>Wayne's Web Computing Diary</span>
           </NavLink>
 
           {/* Desktop Navigation */}
