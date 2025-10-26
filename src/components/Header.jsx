@@ -27,8 +27,8 @@ export default function Header() {
 
         {isOpen && (
           <div className={styles.mobileNav}>
-            <NavLink href="/topics" onClick={() => setIsOpen(false)}>Topics</NavLink>
-            <NavLink href="/about" onClick={() => setIsOpen(false)}>About</NavLink>
+            <NavLink to="/topics" onClick={() => setIsOpen(false)}>Topics</NavLink>
+            <NavLink to="/about" onClick={() => setIsOpen(false)}>About</NavLink>
           </div>
         )}
       </div>
