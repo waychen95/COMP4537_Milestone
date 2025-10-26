@@ -6,3 +6,9 @@
   margin-top: auto;
   border-top: 1px solid #333;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 12px;
+  }
+}

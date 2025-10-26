@@ -24,6 +24,27 @@ export default function TopicDetail() {
         <span className={styles.disabled}></span>
       )}
 
+      <div className={styles.mobileArrow}>
+        {prevTopic ? (
+          <Link to={`/topics/${prevTopic.id}`} className={styles.arrow}>
+            <p>←</p>
+            <p className={styles.arrowTitle}>{prevTopic.title}</p>
+          </Link>
+        ) : (
+          <span className={styles.disabled}></span>
+        )}
+        {nextTopic ? (
+          <Link to={`/topics/${nextTopic.id}`} className={styles.arrow}>
+            <p className={styles.arrowTitle}>{nextTopic.title}</p>
+            <p>→</p>
+          </Link>
+        ) : (
+          <span className={styles.disabled}> </span>
+        )}
+      </div>
+
+      
+
       {!topic ? (
         <div className={styles.contentContainer}>
           <h2>Topic not found</h2>

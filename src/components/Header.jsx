@@ -15,7 +15,6 @@ export default function Header() {
             <span id={styles.title}>Wayne's Web Computing Diary</span>
           </NavLink>
 
-          {/* Desktop Navigation */}
           <div className={styles.desktopNav}>
             <NavLink to="/topics">Topics</NavLink>
             <NavLink to="/about">About</NavLink>

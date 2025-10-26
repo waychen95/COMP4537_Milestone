@@ -39,3 +39,58 @@
   align-items: flex-start;
   max-width: 600px;
 }
+
+.mobileArrow {
+    display: none;
+}
+
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+
+
+@media (max-width: 768px) {
+    .arrows {
+        display: none;
+    }
+
+    .main {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .arrow {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.2s;
+        color: #654e4088;
+        width: 100%;
+    }
+
+    .arrow:hover {
+        color: #654e40;
+    }
+
+    .arrow:hover .arrowTitle {
+        text-decoration: underline;
+    }
+
+    .mobileArrow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0.5rem;
+        width: 100%;
+    }
+}
