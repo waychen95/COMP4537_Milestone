@@ -88,3 +88,13 @@ a {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  #logo {
+    size: 20px;
+  }
+
+  #title {
+    font-size: 1rem;
+  }
+}

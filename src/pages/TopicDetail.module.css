@@ -1,18 +1,18 @@
 .main {
     display: flex;
     flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
 }
 
 .arrows {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 1rem;
   padding: 0.5rem;
-  border-radius: 5%;
   text-align: center;
   font-weight: 500;
-  width: 10%;
+  width: 12%;
   text-decoration: none;
   transition: color 0.2s;
   color: #654e4088;
@@ -35,8 +35,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   max-width: 600px;
-  margin: auto;
 }
