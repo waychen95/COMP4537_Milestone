@@ -727,6 +727,30 @@ app.post('/submit', (req, res) => {
   },
   {
     number: "XXXIII",
+    id: "get-vs-post",
+    title: "GET vs POST",
+    description: "Differences between GET and POST HTTP methods",
+    content: `
+### Overview
+- **GET**: retrieve data, parameters in URL, idempotent
+- **POST**: send data, parameters in body, may create/update resources
+
+### Example
+\`\`\`js
+// GET
+fetch('/api/data?user=1');
+
+// POST
+fetch('/api/data', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ user: 1 })
+});
+\`\`\`
+`
+  },
+    {
+    number: "XXXIV",
     id: "web-security-best-practices",
     title: "Web Security Best Practices",
     description: "Essential steps to secure your web applications",
@@ -739,30 +763,17 @@ app.post('/submit', (req, res) => {
 `
   },
   {
-    number: "XXXIV",
-    id: "encryption",
-    title: "Encryption",
-    description: "Encoding data to protect confidentiality and integrity",
-    content: `
-### Overview
-- Symmetric: same key to encrypt/decrypt
-- Asymmetric: public/private keys
-- Used in SSL/TLS, password storage
-`
-  },
-  {
     number: "XXXV",
-    id: "hashing",
-    title: "Hashing",
-    description: "Transforming data into fixed-length hashes for integrity and password protection",
+    id: "secure-restful-apis",
+    title: "Creating Secure RESTful APIs",
+    description: "Best practices to protect REST APIs from attacks",
     content: `
-### Overview
-- One-way function
-- Used for passwords, checksums, digital signatures
-\`\`\`js
-const crypto = require('crypto');
-const hash = crypto.createHash('sha256').update('password').digest('hex');
-\`\`\`
+### Tips
+- Use HTTPS
+- Authenticate with tokens (JWT/OAuth)
+- Validate input data
+- Rate limit requests
+- Avoid exposing sensitive info in responses
 `
   },
   {
@@ -855,17 +866,25 @@ Access to fetch at 'https://api.example.com/data' from origin 'https://yourdomai
 
 To fix this, the server must include appropriate CORS headers.
 
-### Example (Express)
+### Example
 \`\`\`js
-const express = require('express');
-const cors = require('cors');
-const app = express();
+const http = require('http');
 
-app.use(cors()); // Allow all origins
+const server = http.createServer((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-// Or restrict to specific origin
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    return res.end();
+  }
 
-app.use(cors({ origin: 'https://example.com' }));
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ message: 'Hello World' }));
+});
+
+server.listen(3000);
 \`\`\`
 `
   },
@@ -891,60 +910,33 @@ app.listen(3000, () => console.log('Server running on port 3000'));
   },
   {
     number: "XLI",
-    id: "get-vs-post",
-    title: "GET vs POST",
-    description: "Differences between GET and POST HTTP methods",
+    id: "encryption",
+    title: "Encryption",
+    description: "Encoding data to protect confidentiality and integrity",
     content: `
 ### Overview
-- **GET**: retrieve data, parameters in URL, idempotent
-- **POST**: send data, parameters in body, may create/update resources
-
-### Example
-\`\`\`js
-// GET
-fetch('/api/data?user=1');
-
-// POST
-fetch('/api/data', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ user: 1 })
-});
-\`\`\`
+- Symmetric: same key to encrypt/decrypt
+- Asymmetric: public/private keys
+- Used in SSL/TLS, password storage
 `
   },
   {
     number: "XLII",
-    id: "secure-restful-apis",
-    title: "Creating Secure RESTful APIs",
-    description: "Best practices to protect REST APIs from attacks",
+    id: "hashing",
+    title: "Hashing",
+    description: "Transforming data into fixed-length hashes for integrity and password protection",
     content: `
-### Tips
-- Use HTTPS
-- Authenticate with tokens (JWT/OAuth)
-- Validate input data
-- Rate limit requests
-- Avoid exposing sensitive info in responses
-`
-  },
-  {
-    number: "XLIII",
-    id: "httponly-cookie",
-    title: "httpOnly Cookie",
-    description: "Securing web authentication using cookies with httpOnly flag",
-    content: `
-### httpOnly Cookies
-- Cannot be accessed via JS
-- Helps prevent XSS attacks
-
-### Example (Express)
+### Overview
+- One-way function
+- Used for passwords, checksums, digital signatures
 \`\`\`js
-res.cookie('token', 'abc123', { httpOnly: true, secure: true });
+const crypto = require('crypto');
+const hash = crypto.createHash('sha256').update('password').digest('hex');
 \`\`\`
 `
   },
   {
-    number: "XLIV",
+    number: "XLIII",
     id: "rdbms-crud",
     title: "RDBMS and CRUD Operations",
     description: "Relational databases and basic Create, Read, Update, Delete operations",
@@ -970,7 +962,7 @@ DELETE FROM users WHERE name='Wayne';
 `
   },
   {
-    number: "XLV",
+    number: "XLIV",
     id: "normalization",
     title: "Database Normalization",
     description: "1:M, M:M relationships and normalization forms (1NF, 2NF)",
@@ -983,15 +975,35 @@ DELETE FROM users WHERE name='Wayne';
 `
   },
   {
-    number: "XLVI",
-    id: "hosting-llm",
-    title: "Hosting LLM Models",
-    description: "Guidelines for deploying large language models on servers",
+    number: "XLV",
+    id: "httponly-cookie",
+    title: "httpOnly Cookie",
+    description: "Securing web authentication using cookies with httpOnly flag",
     content: `
-### Tips
-- Consider GPU-enabled hosting
-- Use containers for portability
-- Monitor latency and memory usage
+### httpOnly Cookies
+- Cannot be accessed via JS
+- Helps prevent XSS attacks
+
+### Example (Express)
+\`\`\`js
+res.cookie('token', 'abc123', { httpOnly: true, secure: true });
+\`\`\`
+`
+  },
+  {
+    number: "XLVI",
+    id: "ssl-tls",
+    title: "SSL/TLS",
+    description: "Securing data in transit with encryption protocols",
+    content: `
+### Overview
+- SSL/TLS encrypts data between client and server
+- Uses certificates for authentication
+- Essential for HTTPS
+
+### Example
+- Obtain SSL certificate (Let's Encrypt)
+- Configure web server (e.g., Nginx, Apache) to use SSL
 `
   },
   {
@@ -1005,6 +1017,9 @@ DELETE FROM users WHERE name='Wayne';
 - Monitor uptime and errors
 - Update dependencies regularly
 - Implement backups
+
+### Tips
+- AWS is not the only option; consider alternatives like DigitalOcean, Heroku, or Netlify
 `
   },
 ];
