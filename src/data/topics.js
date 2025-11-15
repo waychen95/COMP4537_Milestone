@@ -5,15 +5,18 @@ const topics = [
     title: "Interview Tips",
     description: "Effective preparation strategies and common questions for web development interviews",
     content: `
-### Overview
-Interviews often test both technical knowledge and problem-solving skills. Prepare by practicing coding exercises, reviewing common data structures and algorithms, and understanding web fundamentals.
+  ### Overview
+  Interviews often test both technical knowledge and problem solving skills. Prepare by practicing coding exercises, reviewing common data structures and algorithms, and understanding web fundamentals.
 
-### Tips
-- Review JavaScript, HTML, and CSS basics.
-- Practice whiteboard-style problems.
-- Be ready to explain your thought process.
-- Ask clarifying questions before coding.
-`
+  ### Personal Experience
+  For my first interview I spent a lot of time practicing how to solve problems on LeetCode but I did not practice explaining my thought process. I realized later that interviewers care just as much about how I think as they care about whether I reach the correct answer. In other interviews I focused more on breaking down the problem, talking through each step, and explaining why I chose a certain approach. This made the conversations smoother and helped me perform better even when the questions were challenging.
+
+  ### Tips
+  1. Review JavaScript, HTML, and CSS basics
+  2. Practice whiteboard style problems
+  3. Explain your thought process clearly
+  4. Ask clarifying questions before coding
+  `
   },
   {
     number: "II",
@@ -97,22 +100,28 @@ async function fetchData() {
   },
   {
     number: "V",
-    id: "memory-leak",
-    title: "Memory Leak",
-    description: "Detecting and preventing memory leaks in JavaScript applications",
+    id: "var-vs-let-vs-const",
+    title: "Var vs Let vs Const",
+    description: "Understanding the differences between var, let, and const in JavaScript",
     content: `
 ### Overview
-Memory leaks occur when your program holds references to objects that are no longer needed, preventing garbage collection.
+- **var**: function-scoped, can be redeclared and updated, hoisted with undefined
+- **let**: block-scoped, can be updated but not redeclared, hoisted but in Temporal Dead Zone
+- **const**: block-scoped, cannot be updated or redeclared, must be initialized at declaration
 
-### Common Causes
-- Unremoved event listeners
-- Global variables
-- Closures holding large objects
-
-### Prevention
-- Remove listeners when not needed
-- Use local scope for variables
-- Monitor memory with browser dev tools
+### Example
+\`\`\`js
+function example() {
+  if (true) {
+    var x = 1; // function-scoped
+    let y = 2; // block-scoped
+    const z = 3; // block-scoped
+  }
+  console.log(x); // 1
+  console.log(y); // ReferenceError
+  console.log(z); // ReferenceError
+}
+\`\`\`
 `
   },
   {
@@ -156,6 +165,11 @@ Choosing the right architecture helps maintainability, scalability, efficiency, 
 - Microservices
 - Event-Driven
 - Serverless
+- MVC
+- MVVM
+- Micro-Frontends
+- Hexagonal
+- CQRS
 `
   },
   {
@@ -188,9 +202,13 @@ Separates concerns into layers:
 - Business Logic: Processes rules and logic
 - Data: Database or API layer
 
-### Benefits
+### Pros
 - Easier to maintain
 - Clear separation of concerns
+
+### Cons
+- Can lead to performance overhead due to multiple layers
+
 `
   },
   {
@@ -202,12 +220,12 @@ Separates concerns into layers:
 ### Overview
 Applications are split into small, independent services communicating over APIs.
 
-### Benefits
+### Pros
 - Independent deployment
 - Scalability per service
 - Fault isolation
 
-### Challenges
+### Cons
 - Complex orchestration
 - More network calls
 `
@@ -221,6 +239,15 @@ Applications are split into small, independent services communicating over APIs.
 ### Overview
 Components communicate by producing and consuming events.
 
+### Pros
+- Loose coupling
+- Scalability
+- Real-time processing
+
+### Cons
+- Complexity in managing event flow
+- Debugging can be challenging
+
 ### Example
 - User places order → OrderService emits "OrderCreated" event → EmailService listens and sends confirmation
 `
@@ -233,6 +260,15 @@ Components communicate by producing and consuming events.
     content: `
 ### Overview
 Serverless functions execute on-demand and scale automatically. You pay only for execution time.
+
+### Pros
+- No server management
+- Automatic scaling
+- Cost-effective
+
+### Cons
+- Limited control over environment
+- Limited execution time
 
 ### Example
 \`\`\`js
@@ -253,9 +289,12 @@ exports.handler = async (event) => {
 - View: displays UI
 - Controller: processes input
 
-### Benefits
+### Pros
 - Clear separation
 - Easier testing and maintenance
+
+### Cons
+- Can lead to tight coupling if not designed well
 `
   },
   {
@@ -268,9 +307,14 @@ exports.handler = async (event) => {
 - Model: data
 - View: UI
 - ViewModel: binds Model to View with reactive updates
-
-### Use Cases
 - Popular in frameworks like Vue and Angular
+
+### Pros
+- Two-way data binding
+- Easier UI management
+
+### Cons
+- Can lead to complex ViewModels
 `
   },
   {
@@ -282,10 +326,14 @@ exports.handler = async (event) => {
 ### Overview
 Break frontend into multiple apps, each responsible for a feature.
 
-### Benefits
+### Pros
 - Independent development and deployment
 - Smaller codebases
 - Teams can work autonomously
+
+### Cons
+- Integration complexity
+- Consistent UX can be challenging
 `
   },
   {
@@ -297,9 +345,12 @@ Break frontend into multiple apps, each responsible for a feature.
 ### Overview
 Business logic is at the center, surrounded by adapters connecting to databases, UIs, or external APIs.
 
-### Benefits
+### Pros
 - Testable core logic
 - Flexible integration points
+
+### Cons
+- Initial complexity in setup
 `
   },
   {
@@ -312,9 +363,12 @@ Business logic is at the center, surrounded by adapters connecting to databases,
 - Commands: modify state
 - Queries: read state
 
-### Benefits
+### Pros
 - Optimized read/write paths
 - Easier scaling
+
+### Cons
+- Increased complexity
 `
   },
   {
@@ -324,9 +378,11 @@ Business logic is at the center, surrounded by adapters connecting to databases,
     description: "Guidelines for serving and scaling pretrained AI models in production",
     content: `
 ### Overview
-- Use GPU-enabled hosting for heavy models
-- Containerize models for easy deployment
-- Monitor resource usage and latency
+- Choose appropriate hardware (GPU/TPU) based on model requirements
+- Use containerization (Docker) for portability
+- Implement caching for frequent requests
+- Monitor performance and latency
+- Consider using managed services (AWS SageMaker, Google AI Platform)
 `
   },
 
@@ -451,6 +507,10 @@ fetch('https://api.example.com/data')
 - JS uses a single-threaded call stack.
 - Functions are pushed onto the stack and popped when finished.
 - Helps understand async behavior.
+
+### Microtasks and Macrotasks
+- Microtasks (promises) run after the current stack.
+- Macrotasks (setTimeout) run after microtasks.
 `
   },
 
@@ -480,42 +540,73 @@ fetch('https://api.example.com/data')
   },
   {
     number: "XXV",
-    id: "single-sign-on",
-    title: "Single Sign-On (SSO)",
-    description: "Allowing users to authenticate once and access multiple applications securely",
+    id: "http-status-codes",
+    title: "HTTP Status Codes",
+    description: "Understanding standard response codes used by servers",
     content: `
-### Overview
-- Centralized authentication
-- Reduces password fatigue
-- Examples: OAuth, SAML
-`
+  ### Overview
+  Status codes communicate the result of an HTTP request. They help the client understand whether a request succeeded, failed, or needs action.
+
+  ### Categories
+  1. 100 to 199 informational
+  2. 200 to 299 success
+  3. 300 to 399 redirection
+  4. 400 to 499 client errors
+  5. 500 to 599 server errors
+
+  ### Example
+  \`\`\`js
+  app.get('/users', (req, res) => {
+    res.status(200).send('OK');
+  });
+  \`\`\`
+  `
   },
   {
     number: "XXVI",
-    id: "web-push-notifications",
-    title: "Web Push Notifications",
-    description: "Sending timely updates to users via browser-based notifications",
+    id: "http-headers",
+    title: "HTTP Headers",
+    description: "Key value pairs used to pass additional information with requests and responses",
     content: `
-### Overview
-- Requires service worker registration
-- Push API triggers notifications
-- Useful for engagement
-`
+  ### Overview
+  Headers let the client and server share important context about the request. They can describe content type, caching behavior, authentication info, and more.
+
+  ### Common Types
+  1. Request headers like Accept, Authorization, and Content Type
+  2. Response headers like Content Length and Set Cookie
+  3. Security related headers like Content Security Policy and Strict Transport Security
+
+  ### Example
+  \`\`\`js
+  app.get('/data', (req, res) => {
+    res.set('Content Type', 'application/json');
+    res.send({ message: 'Hello world' });
+  });
+  \`\`\`
+  `
   },
   {
     number: "XXVII",
-    id: "html5-canvas",
-    title: "HTML5 Canvas",
-    description: "Drawing graphics and animations dynamically using JavaScript",
+    id: "url-parameters",
+    title: "URL Parameters and Query Strings",
+    description: "Passing data in URLs for routing and filtering",
     content: `
-### Example
-\`\`\`js
-const canvas = document.getElementById('myCanvas');
-const ctx = canvas.getContext('2d');
-ctx.fillStyle = 'red';
-ctx.fillRect(10, 10, 100, 50);
-\`\`\`
-`
+  ### Overview
+  Routes often accept parameters in the path or query string. These are widely used in REST API design.
+
+  ### Example
+  \`\`\`js
+  app.get('/users/:id', (req, res) => {
+    const id = req.params.id;
+    res.send('User id is ' + id);
+  });
+
+  app.get('/search', (req, res) => {
+    const term = req.query.q;
+    res.send('Search term is ' + term);
+  });
+  \`\`\`
+  `
   },
   {
     number: "XXVIII",
@@ -593,19 +684,33 @@ ctx.fillRect(10, 10, 100, 50);
   `
   },
   {
-    number: "XXXI",
-    id: "web-workers",
-    title: "Web Workers",
-    description: "Running background tasks without blocking the main UI thread",
-    content: `
+  number: "XXXI",
+  id: "input-validation",
+  title: "Input Validation",
+  description: "Protecting APIs and applications by validating user input",
+  content: `
 ### Overview
-- Executes JS in separate thread
-- Offloads heavy computations
+Validating inputs prevents malicious data from reaching your backend or database.
+
+### Example
 \`\`\`js
-const worker = new Worker('worker.js');
-worker.onmessage = (e) => console.log(e.data);
-worker.postMessage('start');
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/submit', (req, res) => {
+  const name = req.body.name;
+  if (typeof name !== 'string' || name.length === 0) {
+    return res.status(400).send('Invalid input');
+  }
+  res.send('Input accepted');
+});
 \`\`\`
+
+### Notes
+- Prevents SQL Injection and XSS
+- Always validate on server-side, never rely solely on client-side checks
 `
   },
   {
