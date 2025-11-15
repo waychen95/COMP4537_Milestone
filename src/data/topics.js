@@ -513,17 +513,16 @@ fetch('https://api.example.com/data')
 - Macrotasks (setTimeout) run after microtasks.
 `
   },
-
   {
     number: "XXIII",
-    id: "public-private-key",
-    title: "Public-Key and Private-Key",
-    description: "How asymmetric encryption works in securing communications",
+    id: "caching",
+    title: "Caching",
+    description: "Techniques for storing data locally to improve performance and reduce server load",
     content: `
 ### Overview
-- Public key: encrypt data
-- Private key: decrypt data
-- Used in SSL/TLS, signing, and authentication
+- Stores frequently accessed data
+- Types: browser cache, server cache, CDN
+- Improves load times and reduces bandwidth
 `
   },
   {
