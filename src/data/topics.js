@@ -727,6 +727,30 @@ app.post('/submit', (req, res) => {
   },
   {
     number: "XXXIII",
+    id: "get-vs-post",
+    title: "GET vs POST",
+    description: "Differences between GET and POST HTTP methods",
+    content: `
+### Overview
+- **GET**: retrieve data, parameters in URL, idempotent
+- **POST**: send data, parameters in body, may create/update resources
+
+### Example
+\`\`\`js
+// GET
+fetch('/api/data?user=1');
+
+// POST
+fetch('/api/data', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ user: 1 })
+});
+\`\`\`
+`
+  },
+    {
+    number: "XXXIV",
     id: "web-security-best-practices",
     title: "Web Security Best Practices",
     description: "Essential steps to secure your web applications",
@@ -739,7 +763,153 @@ app.post('/submit', (req, res) => {
 `
   },
   {
-    number: "XXXIV",
+    number: "XXXV",
+    id: "secure-restful-apis",
+    title: "Creating Secure RESTful APIs",
+    description: "Best practices to protect REST APIs from attacks",
+    content: `
+### Tips
+- Use HTTPS
+- Authenticate with tokens (JWT/OAuth)
+- Validate input data
+- Rate limit requests
+- Avoid exposing sensitive info in responses
+`
+  },
+  {
+  number: "XXXVI",
+  id: "input-validation",
+  title: "Input Validation",
+  description: "Protecting APIs and applications by validating user input",
+  content: `
+### Overview
+Validating inputs prevents malicious data from reaching your backend or database.
+
+### Example
+\`\`\`js
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/submit', (req, res) => {
+  const name = req.body.name;
+  if (typeof name !== 'string' || name.length === 0) {
+    return res.status(400).send('Invalid input');
+  }
+  res.send('Input accepted');
+});
+\`\`\`
+
+### Notes
+- Prevents SQL Injection and XSS
+- Always validate on server-side, never rely solely on client-side checks
+`
+  },
+  {
+  number: "XXXVII",
+  id: "api-rate-limiting",
+  title: "API Rate Limiting",
+  description: "Controlling the number of requests a client can make to prevent abuse",
+  content: `
+### Overview
+Rate limiting protects APIs from overuse, brute force attacks, or accidental overload.
+
+### Example (Express + express-rate-limit)
+\`\`\`js
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // max requests per IP
+});
+
+app.use('/api/', limiter);
+\`\`\`
+
+### Notes
+- Helps with security and performance
+- Can be combined with authentication for fine-grained control
+`
+  },
+  {
+  number: "XXXVIII",
+  id: "token-refresh-strategy",
+  title: "Token Refresh Strategy",
+  description: "Managing short-lived access tokens securely in web applications",
+  content: `
+### Overview
+Short-lived tokens improve security, but require a refresh mechanism to maintain sessions.
+
+### Example Flow
+1. Client authenticates and receives access token + refresh token
+2. When access token expires, client requests new one using refresh token
+3. Server validates refresh token and issues a new access token
+
+### Notes
+- Store refresh tokens securely (httpOnly cookies)
+- Reduces risk if access token is compromised
+`
+  },
+  {
+    number: "XXXIX",
+    id: "cors",
+    title: "CORS (Cross-Origin Resource Sharing)",
+    description: "Mechanism to allow or restrict cross-origin HTTP requests",
+    content: `
+### Overview
+Browsers restrict requests to different origins by default. CORS headers determine whether cross-origin requests are allowed.
+
+Common error you may see:
+
+Access to fetch at 'https://api.example.com/data' from origin 'https://yourdomain.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+To fix this, the server must include appropriate CORS headers.
+
+### Example
+\`\`\`js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    return res.end();
+  }
+
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ message: 'Hello World' }));
+});
+
+server.listen(3000);
+\`\`\`
+`
+  },
+  {
+    number: "XL",
+    id: "express",
+    title: "Express.js",
+    description: "Web framework for Node.js to build server-side applications",
+    content: `
+### Overview
+Express simplifies routing, middleware, and server creation in Node.js.
+
+### Example
+\`\`\`js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+\`\`\`
+`
+  },
+  {
+    number: "XLI",
     id: "encryption",
     title: "Encryption",
     description: "Encoding data to protect confidentiality and integrity",
@@ -751,7 +921,7 @@ app.post('/submit', (req, res) => {
 `
   },
   {
-    number: "XXXV",
+    number: "XLII",
     id: "hashing",
     title: "Hashing",
     description: "Transforming data into fixed-length hashes for integrity and password protection",
@@ -763,6 +933,93 @@ app.post('/submit', (req, res) => {
 const crypto = require('crypto');
 const hash = crypto.createHash('sha256').update('password').digest('hex');
 \`\`\`
+`
+  },
+  {
+    number: "XLIII",
+    id: "rdbms-crud",
+    title: "RDBMS and CRUD Operations",
+    description: "Relational databases and basic Create, Read, Update, Delete operations",
+    content: `
+### Overview
+- RDBMS stores data in tables with relationships
+- CRUD operations manipulate database records
+
+### Example (SQL)
+\`\`\`sql
+-- Create
+INSERT INTO users(name, email) VALUES('Wayne', 'wayne@example.com');
+
+-- Read
+SELECT * FROM users;
+
+-- Update
+UPDATE users SET email='new@example.com' WHERE name='Wayne';
+
+-- Delete
+DELETE FROM users WHERE name='Wayne';
+\`\`\`
+`
+  },
+  {
+    number: "XLIV",
+    id: "normalization",
+    title: "Database Normalization",
+    description: "1:M, M:M relationships and normalization forms (1NF, 2NF)",
+    content: `
+### Overview
+- **1:M**: One row relates to multiple rows in another table
+- **M:M**: Many-to-many via junction table
+- **1NF**: Eliminate repeating groups
+- **2NF**: Eliminate partial dependencies
+`
+  },
+  {
+    number: "XLV",
+    id: "httponly-cookie",
+    title: "httpOnly Cookie",
+    description: "Securing web authentication using cookies with httpOnly flag",
+    content: `
+### httpOnly Cookies
+- Cannot be accessed via JS
+- Helps prevent XSS attacks
+
+### Example (Express)
+\`\`\`js
+res.cookie('token', 'abc123', { httpOnly: true, secure: true });
+\`\`\`
+`
+  },
+  {
+    number: "XLVI",
+    id: "ssl-tls",
+    title: "SSL/TLS",
+    description: "Securing data in transit with encryption protocols",
+    content: `
+### Overview
+- SSL/TLS encrypts data between client and server
+- Uses certificates for authentication
+- Essential for HTTPS
+
+### Example
+- Obtain SSL certificate (Let's Encrypt)
+- Configure web server (e.g., Nginx, Apache) to use SSL
+`
+  },
+  {
+    number: "XLVII",
+    id: "maintaining-hosting-services",
+    title: "Choosing and Maintaining Hosting Services",
+    description: "Selecting the right hosting provider and maintaining uptime",
+    content: `
+### Overview
+- Evaluate cost, performance, and reliability
+- Monitor uptime and errors
+- Update dependencies regularly
+- Implement backups
+
+### Tips
+- AWS is not the only option; consider alternatives like DigitalOcean, Heroku, or Netlify
 `
   },
 ];
